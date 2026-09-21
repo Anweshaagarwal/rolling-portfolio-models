@@ -1,0 +1,99 @@
+{
+  "scope": "out-of-sample rolling validation",
+  "validation_period": [
+    "20260102",
+    "20260630"
+  ],
+  "validation_days": 123,
+  "assets": 98,
+  "dropped_assets": [
+    "ME9 BM10",
+    "BIG HiBM"
+  ],
+  "rolling_window_days": 126,
+  "first_training_window": [
+    "20250703",
+    "20251231"
+  ],
+  "last_training_window": [
+    "20251226",
+    "20260629"
+  ],
+  "timing_rule": "Each target day uses exactly the prior 126 trading days. The target and all future returns are excluded.",
+  "alpha_grid": {
+    "minimum": 1e-08,
+    "maximum": 100000000.0,
+    "count": 101
+  },
+  "cross_validation": "5-fold expanding TimeSeriesSplit inside each 126-day window; negative MSE scoring",
+  "models": {
+    "EW": {
+      "days": 123,
+      "mean_pct": 0.1321851667496267,
+      "std_pct": 0.9973784339484505,
+      "daily_sharpe": 0.13253260974004444,
+      "annualized_sharpe": 2.103889955871206,
+      "cumulative_return_pct": 16.93283239998431,
+      "max_drawdown_pct": -8.63195462201265
+    },
+    "OLS": {
+      "days": 123,
+      "mean_pct": -0.015073318133277913,
+      "std_pct": 0.8770242681873185,
+      "daily_sharpe": -0.017186888299490582,
+      "annualized_sharpe": -0.2728333935089873,
+      "cumulative_return_pct": -2.2965760540113456,
+      "max_drawdown_pct": -8.988186222627304
+    },
+    "LASSO": {
+      "days": 123,
+      "mean_pct": 0.042413069091195375,
+      "std_pct": 0.5470546596420778,
+      "daily_sharpe": 0.07752985619196633,
+      "annualized_sharpe": 1.2307483119992646,
+      "cumulative_return_pct": 5.1621199210359014,
+      "max_drawdown_pct": -4.598200842037004
+    },
+    "RIDGE": {
+      "days": 123,
+      "mean_pct": -0.01253197246068517,
+      "std_pct": 0.5841253939958146,
+      "daily_sharpe": -0.021454250387845597,
+      "annualized_sharpe": -0.34057566654930294,
+      "cumulative_return_pct": -1.7350392480790178,
+      "max_drawdown_pct": -7.9224674635009595
+    }
+  },
+  "selected_alpha": {
+    "LASSO": {
+      "minimum": 0.008317637711026709,
+      "median": 0.03630780547701017,
+      "maximum": 0.1096478196143185,
+      "unique_values": 8
+    },
+    "RIDGE": {
+      "minimum": 6.309573444801943,
+      "median": 13.1825673855641,
+      "maximum": 57.543993733715666,
+      "unique_values": 7
+    }
+  },
+  "LASSO_diagnostics": {
+    "average_nonzero_beta": 32.49593495934959,
+    "average_turnover": 0.25178145647850286,
+    "average_max_abs_weight": 0.4282115580672613,
+    "average_short_exposure": 0.9998235315101514,
+    "windows_with_candidate_convergence_warnings": 0,
+    "maximum_selected_refit_dual_gap": 1.2077489876624384e-07
+  },
+  "RIDGE_diagnostics": {
+    "average_turnover": 0.28284840793617017,
+    "average_max_abs_weight": 0.2549684426014538,
+    "average_short_exposure": 2.017622679962621
+  },
+  "checks": {
+    "all_training_windows_have_126_rows": true,
+    "all_weight_sums_within_1e_10": true,
+    "missing_values_used": false
+  }
+}
